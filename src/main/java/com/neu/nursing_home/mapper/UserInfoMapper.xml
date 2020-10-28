@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neu.nursing_home.mapper.UserInfoMapper">
+    <resultMap id="UserInfo" type="com.neu.nursing_home.entity.UserInfo">
+        <id column="uid" jdbcType="INTEGER" property="uid"/>
+        <result column="uname" jdbcType="VARCHAR" property="uname"/>
+        <result column="upassword" jdbcType="VARCHAR" property="upassword"/>
+    </resultMap>
+    <select id="selByUser" parameterType="com.neu.nursing_home.entity.UserInfo" resultMap="UserInfo">
+        select uid, uname, upassword
+        from user_info
+        where uname=#{uname} and upassword=#{upassword}
+    </select>
+</mapper>
