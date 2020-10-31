@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neu.nursing_home.mapper.CheckInEntryMapper">
+    <resultMap id="CheckInEntry" type="com.neu.nursing_home.entity.CheckInEntry">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="customer_id" jdbcType="VARCHAR" property="customerId"/>
+        <result column="customer_name" jdbcType="VARCHAR" property="customerName"/>
+        <result column="customer_age" jdbcType="VARCHAR" property="customerAge"/>
+        <result column="customer_sex" jdbcType="VARCHAR" property="customerSex"/>
+        <result column="bed_id" jdbcType="VARCHAR" property="bedId"/>
+        <result column="checkin_date" jdbcType="VARCHAR" property="checkInDate"/>
+        <result column="remarks" jdbcType="VARCHAR" property="remarks"/>
+    </resultMap>
+
+    <select id="selectAllCheckInEntries" resultMap="CheckInEntry">
+        select id,
+               customer_id,
+               customer_name,
+               customer_age,
+               customer_sex,
+               bed_id,
+               checkin_date,
+               remarks
+        from checkin;
+    </select>
+
+    <insert id="insertCheckInEntry" parameterType="com.neu.nursing_home.entity.CheckInEntry">
+        insert into checkin(customer_id, customer_name, customer_age, customer_sex, bed_id, checkin_date, remarks)
+        values (#{customerId}, #{customerName}, #{customerAge}, #{customerSex}, #{bedId}, #{checkInDate}, #{remarks});
+    </insert>
+
+    <delete id="deleteCheckInEntryById" parameterType="int">
+        delete
+        from checkin
+        where id = #{id};
+    </delete>
+
+    <delete id="deleteCheckInEntryByCustomerId" parameterType="String">
+        delete
+        from checkin
+        where customer_id = #{customerId};
+    </delete>
+
+</mapper>

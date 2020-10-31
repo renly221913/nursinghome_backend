@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neu.nursing_home.mapper.CheckOutEntryMapper">
+    <resultMap id="CheckOutEntry" type="com.neu.nursing_home.entity.CheckOutEntry">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="customer_id" jdbcType="VARCHAR" property="customerId"/>
+        <result column="checkout_date" jdbcType="VARCHAR" property="checkOutDate"/>
+        <result column="remarks" jdbcType="VARCHAR" property="remarks"/>
+    </resultMap>
+
+    <select id="selectAllCheckoutEntries" resultMap="CheckOutEntry">
+        select id, customer_id, checkout_date, remarks
+        from checkout;
+    </select>
+
+    <insert id="insertCheckOutEntry" parameterType="com.neu.nursing_home.entity.CheckOutEntry">
+        insert into checkout(customer_id, checkout_date, remarks)
+        values (#{customerId}, #{checkOutDate}, #{remarks});
+    </insert>
+
+    <delete id="deleteCheckOutEntryById" parameterType="int">
+        delete
+        from checkout
+        where id = #{id};
+    </delete>
+
+    <delete id="deleteCheckOutEntryByCustomerId" parameterType="String">
+        delete
+        from checkout
+        where customer_id = #{customerId};
+    </delete>
+
+</mapper>
