@@ -2,20 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.neu.nursing_home.mapper.BedMapper">
     <resultMap id="Bed" type="com.neu.nursing_home.entity.Bed">
-        <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="bed_status" jdbcType="INTEGER" property="bed_status"/>
+        <id column="id"  property="id"/>
+        <result column="bed_status"  property="bed_status"/>
     </resultMap>
     <select id="selectAllBed" resultMap="Bed">
-        select * from bed;
+        select * from bed
+<!--        <where>
+            <if test="id!=0">
+                id=#{id}
+            </if>
+            <if test="bed_status!=-1">
+                and bed_status=#{bed_status}
+            </if>
+        </where>-->
     </select>
     <insert id="insert" parameterType="com.neu.nursing_home.entity.Bed">
         INSERT INTO bed(id,bed_status)
-        VALUES(#{id},#{bed_status});
+        VALUES(#{id},#{bed_status})
     </insert>
     <delete id="delete">
-        Delete FROM bed where id=#{id};
+        Delete FROM bed where id=#{id}
     </delete>
     <select id="selectById" resultType="com.neu.nursing_home.entity.Bed" parameterType="int">
-        SELECT * FROM bed where id=#{id};
+        SELECT * FROM bed where id=#{id}
     </select>
+    <select id="selectByStatus" resultType="com.neu.nursing_home.entity.Bed" parameterType="String">
+        SELECT * FROM bed where bed_status=#{bed_status}
+    </select>
+    <update id="update" parameterType="com.neu.nursing_home.entity.Bed">
+         UPDATE bed SET bed_status=#{bed_status} WHERE id=#{id}
+    </update>
 </mapper>

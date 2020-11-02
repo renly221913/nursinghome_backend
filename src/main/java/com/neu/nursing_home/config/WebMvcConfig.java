@@ -20,6 +20,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/user/login") //不拦截的路径
                 .excludePathPatterns("/main/")
                 .excludePathPatterns("/checkin/**")
-                .excludePathPatterns("/checkout/**");
+                .excludePathPatterns("/checkout/**")
+                .excludePathPatterns("/bed/**");
     }
 }

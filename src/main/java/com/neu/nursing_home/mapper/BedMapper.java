@@ -13,4 +13,6 @@ public interface BedMapper {
     public void insert(Bed newBed);
     public void delete(Integer id);
     public List<Bed> selectById(Integer id);
+    public List<Bed> selectByStatus(String bed_status);
+    public void update(Bed bed);
 }
