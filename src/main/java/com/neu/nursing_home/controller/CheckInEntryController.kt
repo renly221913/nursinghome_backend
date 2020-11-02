@@ -1,5 +1,7 @@
 package com.neu.nursing_home.controller
 
+import com.github.pagehelper.PageHelper
+import com.github.pagehelper.page.PageMethod
 import com.neu.nursing_home.entity.CheckInEntry
 import com.neu.nursing_home.service.CheckInEntryService
 import org.springframework.web.bind.annotation.*
@@ -15,6 +17,11 @@ class CheckInEntryController {
     @GetMapping(value = ["all_checkin_entries"])
     fun getAllCheckInEntries(): List<CheckInEntry> {
         return checkInEntryService.getAllCheckInEntries()
+    }
+
+    @GetMapping(value = ["paged_checkin_entries"])
+    fun getPagedCheckInEntries(@RequestParam pageNum: Int, @RequestParam pageSize: Int): List<CheckInEntry> {
+        return checkInEntryService.getPageCheckInEntries(pageNum, pageSize)
     }
 
     @PutMapping(value = ["checkin_entry"])
