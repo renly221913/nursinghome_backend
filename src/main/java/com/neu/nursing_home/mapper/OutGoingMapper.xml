@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neu.nursing_home.mapper.OutGoingMapper">
+    <resultMap id="OutGoing" type="com.neu.nursing_home.entity.OutGoing">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="customer_name" jdbcType="VARCHAR" property="customerName"/>
+        <result column="outgoing_date" jdbcType="VARCHAR" property="outgoingDate"/>
+        <result column="outgoing_reason" jdbcType="VARCHAR" property="outgoingReason"/>
+        <result column="return_date" jdbcType="VARCHAR" property="returnDate"/>
+        <result column="remarks" jdbcType="VARCHAR" property="remarks"/>
+    </resultMap>
+
+    <select id="selectAllRecords" resultMap="OutGoing">
+        select id, customer_name, outgoing_date,outgoing_reason,return_date,remarks
+        from outgoing;
+    </select>
+
+    <insert id="insertRecords" parameterType="com.neu.nursing_home.entity.OutGoing">
+        insert into outgoing(customer_name, outgoing_date,outgoing_reason,return_date,remarks)
+        values (#{customerName}, #{outgoingDate}, #{outgoingReason},#{returnDate}, #{remarks});
+    </insert>
+
+    <delete id="deleteRecords" parameterType="int">
+        delete
+        from outgoing
+        where id = #{id};
+    </delete>
+</mapper>
