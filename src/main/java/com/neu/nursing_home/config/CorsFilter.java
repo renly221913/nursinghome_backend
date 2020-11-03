@@ -18,7 +18,7 @@ public class CorsFilter implements Filter {
 
         HttpServletRequest reqs = (HttpServletRequest) req;
 
-        response.setHeader("Access-Control-Allow-Origin","*");
+        response.setHeader("Access-Control-Allow-Origin", "*");
 
         response.setHeader("Access-Control-Allow-Credentials", "true");
 
@@ -34,10 +34,12 @@ public class CorsFilter implements Filter {
 
     @Override
 
-    public void init(FilterConfig filterConfig) {}
+    public void init(FilterConfig filterConfig) {
+    }
 
     @Override
 
-    public void destroy() {}
+    public void destroy() {
+    }
 
 }

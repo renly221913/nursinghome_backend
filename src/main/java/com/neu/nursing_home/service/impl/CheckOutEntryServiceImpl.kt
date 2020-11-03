@@ -1,5 +1,6 @@
 package com.neu.nursing_home.service.impl
 
+import com.neu.nursing_home.entity.CheckInEntry
 import com.neu.nursing_home.entity.CheckOutEntry
 import com.neu.nursing_home.mapper.CheckOutEntryMapper
 import com.neu.nursing_home.service.CheckOutEntryService
@@ -14,6 +15,15 @@ class CheckOutEntryServiceImpl : CheckOutEntryService {
 
     override fun getAllCheckOutEntries(): List<CheckOutEntry> {
         return checkOutEntryMapper.selectAllCheckoutEntries()
+    }
+
+    override fun getPagedCheckOutEntries(pageNum: Int, pageSize: Int): List<CheckOutEntry> {
+        val list = checkOutEntryMapper.selectAllCheckoutEntries()
+        val newList: MutableList<CheckOutEntry> = ArrayList()
+        for (index in (pageNum - 1) * pageSize until minOf(pageNum * pageSize, list.size)) {
+            newList.add(list[index])
+        }
+        return newList
     }
 
     override fun addCheckOutEntry(checkOutEntry: CheckOutEntry): Boolean {

@@ -5,7 +5,7 @@ import com.neu.nursing_home.mapper.CheckInEntryMapper
 import com.neu.nursing_home.service.CheckInEntryService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import java.util.ArrayList
+
 
 @Service
 class CheckInEntryServiceImpl() :
@@ -16,6 +16,15 @@ class CheckInEntryServiceImpl() :
 
     override fun getAllCheckInEntries(): List<CheckInEntry> {
         return checkInEntryMapper.selectAllCheckInEntries()
+    }
+
+    override fun getPageCheckInEntries(pageNum: Int, pageSize: Int): List<CheckInEntry> {
+        val list = checkInEntryMapper.selectAllCheckInEntries()
+        val newList: MutableList<CheckInEntry> = ArrayList()
+        for (index in (pageNum - 1) * pageSize until minOf(pageNum * pageSize, list.size)) {
+            newList.add(list[index])
+        }
+        return newList
     }
 
     override fun addCheckInEntry(checkInEntry: CheckInEntry): Boolean {

@@ -17,6 +17,11 @@ class CheckOutEntryController {
         return checkOutEntryService.getAllCheckOutEntries()
     }
 
+    @GetMapping(value = ["paged_checkout_entries"])
+    fun getPagedCheckOutEntries(@RequestParam pageNum: Int, @RequestParam pageSize: Int): List<CheckOutEntry> {
+        return checkOutEntryService.getPagedCheckOutEntries(pageNum, pageSize)
+    }
+
     @PutMapping(value = ["checkout_entry"])
     fun addCheckOutEntry(
             @RequestParam customerId: String?,
